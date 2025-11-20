@@ -15,7 +15,7 @@ public class camManager : MonoBehaviour
     private bool isSwiping = false;
     private float swipeThreshold = 50f;
 
-    public Image switchImageUI; // Assign in Inspector
+    public Image switchImageUI;
     private float lastSwitchTime = -999f;
     private float switchCooldown = 1.75f;
     private float uiDisplayDuration = 0.15f;
@@ -31,9 +31,9 @@ public class camManager : MonoBehaviour
         Instance = this;
     }
 
+
     void Start()
     {
-        // Add all cameras to cycle at start
         for (int i = 0; i < cameras.Length; i++)
         {
             activeCameraIndexes.Add(i);
@@ -86,6 +86,7 @@ public class camManager : MonoBehaviour
                                 SwitchCamera(-1);
                         }
 
+
                         isSwiping = false;
                     }
                     break;
@@ -112,7 +113,8 @@ public class camManager : MonoBehaviour
 
         ActivateCamera(activeCameraIndexes[currentIndex]);
 
-        // Show the image
+
+
         if (uiCoroutine != null) StopCoroutine(uiCoroutine);
         uiCoroutine = StartCoroutine(ShowSwitchImage());
     }
@@ -125,7 +127,7 @@ public class camManager : MonoBehaviour
         }
     }
 
-    // Called by AnomalyManager when a camera anomaly is triggered
+    // CameraAnomaly
     public void RemoveCameraFromCycle(int index)
     {
         if (activeCameraIndexes.Contains(index))
@@ -137,8 +139,6 @@ public class camManager : MonoBehaviour
                 ActivateCamera(activeCameraIndexes[currentIndex]);
         }
     }
-
-    // Called by AnomalyManager when a camera anomaly is cleared
     public void AddCameraToCycle(int index)
     {
         if (!activeCameraIndexes.Contains(index))
@@ -148,7 +148,7 @@ public class camManager : MonoBehaviour
         }
     }
 
-    // --- New helper methods for anomaly manager ---
+    //-------anomaly manager communicator ------------------
     public void OnAnomalySpawned(int cameraIndex, AnomalyType anomalyType)
     {
         if (anomalyType == AnomalyType.Camera)
@@ -156,6 +156,7 @@ public class camManager : MonoBehaviour
             RemoveCameraFromCycle(cameraIndex);
         }
     }
+
 
     public void OnAnomalyCleared(int cameraIndex, AnomalyType anomalyType)
     {
@@ -167,7 +168,8 @@ public class camManager : MonoBehaviour
 
     IEnumerator ShowSwitchImage()
     {
-        // Start playing the sound (from the beginning)
+
+    
         if (screenAudioSource != null && screenSwitchSound != null)
         {
             screenAudioSource.clip = screenSwitchSound;
@@ -178,12 +180,14 @@ public class camManager : MonoBehaviour
         yield return new WaitForSeconds(uiDisplayDuration);
 
         switchImageUI.gameObject.SetActive(false);
-
-        // Pause the sound if still playing
+        
         if (screenAudioSource != null && screenAudioSource.isPlaying)
         {
             screenAudioSource.Pause();
+        
+        
         }
     }
 
 }
+
