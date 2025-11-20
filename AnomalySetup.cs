@@ -17,7 +17,6 @@ public class AnomalySetup
     public MovedOrDoorAnomaly[] doorObjects;
     public GameObject[] missingObjects;
 
-    // Flags for each anomaly type
     public bool hasCameraAnomaly = false;
     public bool hasIntruderAnomaly = false;
     public bool hasNewObjectAnomaly = false;
@@ -25,10 +24,13 @@ public class AnomalySetup
     public bool hasDoorAnomaly = false;
     public bool hasMissingObjectAnomaly = false;
 
+
+    
     public bool HasAnyAnomaly()
     {
         return hasCameraAnomaly || hasIntruderAnomaly || hasNewObjectAnomaly ||
                hasMovedObjectAnomaly || hasDoorAnomaly || hasMissingObjectAnomaly;
     }
 }
+
 
