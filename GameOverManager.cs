@@ -14,7 +14,6 @@ public class GameOverManager : MonoBehaviour
         gameOverReasonText.text = reason;
     }
 
-    // Add this method for Quit Button:
     public void OnQuitButtonClicked()
     {
         Application.Quit();
@@ -23,3 +22,4 @@ public class GameOverManager : MonoBehaviour
 #endif
     }
 }
+
