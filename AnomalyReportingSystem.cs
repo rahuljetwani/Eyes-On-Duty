@@ -11,27 +11,29 @@ public class AnomalyReportingSystem : MonoBehaviour
     public GameObject cameraSelectorUI;
 
     [Header("References")]
-    public AnomalyManager anomalyManager; // Assign in Inspector
-    public GameOverManager gameOverManager; // Assign in Inspector
+    public AnomalyManager anomalyManager; 
+    public GameOverManager gameOverManager; 
 
-    private AnomalyType selectedAnomalyType;
-
-    [Header("Report Feedback UI")]
-    public Image reportImageUI; // Assign in Inspector
+    [Header("Report UI")]
+    public Image reportImageUI; 
     public float reportImageDuration = 0.5f;
     private Coroutine reportUICoroutine;
 
-    [Header("Crosses (Lives) UI")]
-    public Image[] crossesUI; // Assign in Inspector (3 crosses)
+    [Header("Crosses UI")]
+    public Image[] crossesUI;
     private int wrongAttempts = 0;
+    
 
     [Header("Sound Effects")]
-    public AudioSource audioSource; // Assign in Inspector
-    public AudioClip crossSoundEffect; // Assign in Inspector
+    public AudioSource audioSource; 
+    public AudioClip crossSoundEffect; 
 
     [Header("Report Sounds")]
     public AudioClip correctReportSound;
     public AudioClip wrongReportSound;
+
+
+    private AnomalyType selectedAnomalyType;
 
 
     void Start()
@@ -40,14 +42,12 @@ public class AnomalyReportingSystem : MonoBehaviour
         ResetCrosses();
     }
 
-    // Called when the "Report" button is clicked
     public void OnReportButtonClicked()
     {
         reportButtonUI.SetActive(false);
         anomalyReportUI.SetActive(true);
     }
 
-    // One method for each anomaly type
     public void OnAnomalyTypeSelected_Intruder() => SelectAnomaly(AnomalyType.Intruder);
     public void OnAnomalyTypeSelected_MissingObject() => SelectAnomaly(AnomalyType.MissingObject);
     public void OnAnomalyTypeSelected_MovedObject() => SelectAnomaly(AnomalyType.MovedObject);
@@ -61,8 +61,7 @@ public class AnomalyReportingSystem : MonoBehaviour
         anomalyReportUI.SetActive(false);
         cameraSelectorUI.SetActive(true);
     }
-
-    // One method for each camera
+    //Camera
     public void OnCameraSelected_Camera0() => ReportAnomaly(0);
     public void OnCameraSelected_Camera1() => ReportAnomaly(1);
     public void OnCameraSelected_Camera2() => ReportAnomaly(2);
@@ -142,3 +141,4 @@ public class AnomalyReportingSystem : MonoBehaviour
         reportImageUI.gameObject.SetActive(false);
     }
 }
+
