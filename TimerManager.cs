@@ -7,7 +7,7 @@ public class TimerManager : MonoBehaviour
     public Text timerText;
 
     [Header("Game Time Settings")]
-    public float totalRealSeconds = 420f; // 7 minutes
+    public float totalRealSeconds = 420f;         // 7 minutes
     private float elapsedRealSeconds = 0f;
 
     private int startHour = 23;
@@ -20,8 +20,8 @@ public class TimerManager : MonoBehaviour
     public GameObject gameOverUI;
 
     [Header("Sound Settings")]
-    public AudioSource hourlyAudioSource;      // Assign in Inspector
-    public AudioClip hourlyReminderSound;      // Assign in Inspector
+    public AudioSource hourlyAudioSource;      
+    public AudioClip hourlyReminderSound;      
 
     void Update()
     {
@@ -37,7 +37,7 @@ public class TimerManager : MonoBehaviour
         string minuteString = currentMinute.ToString("D2");
         timerText.text = $"{hourString}:{minuteString}";
 
-        // ⏰ Play sound once every new hour
+        // sound
         if (currentMinute == 0 && currentHour != lastHourPlayed)
         {
             lastHourPlayed = currentHour;
@@ -45,8 +45,7 @@ public class TimerManager : MonoBehaviour
             if (hourlyAudioSource != null && hourlyReminderSound != null)
                 hourlyAudioSource.PlayOneShot(hourlyReminderSound);
         }
-
-        // Stop at the end
+        
         if (elapsedRealSeconds >= totalRealSeconds)
         {
             isTimerRunning = false;
@@ -54,6 +53,7 @@ public class TimerManager : MonoBehaviour
             TriggerGameOver();
         }
     }
+    
 
     void TriggerGameOver()
     {
@@ -71,3 +71,4 @@ public class TimerManager : MonoBehaviour
 #endif
     }
 }
+
