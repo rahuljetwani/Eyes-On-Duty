@@ -111,7 +111,7 @@ public class AnomalyManager : MonoBehaviour
         {
             Debug.Log("[AnomalyManager] No cameras available for anomaly. Skipping spawn.");
 
-            // Trigger game over due to too many anomalies
+            // GameOver Text !!
             GameOverManager gameOverManager = FindFirstObjectByType<GameOverManager>();
             if (gameOverManager != null)
             {
@@ -166,6 +166,7 @@ public class AnomalyManager : MonoBehaviour
                 break;
         }
 
+
         Debug.Log($"[Anomaly Spawned] Camera: {setup.cameraName} | Type: {selectedType}");
     }
 
@@ -181,11 +182,12 @@ public class AnomalyManager : MonoBehaviour
     public bool ReportAnomaly(int cameraIndex, AnomalyType type)
     {
         if (cameraIndex < 0 || cameraIndex >= cameraAnomalies.Length)
-            return false; // Invalid camera index, treat as false
+            return false;                                                     //check Camera
 
         AnomalySetup setup = cameraAnomalies[cameraIndex];
-        bool anomalyFixed = false; // Track if we fixed an anomaly
+        bool anomalyFixed = false;                                             // check Report
 
+        
         switch (type)
         {
             case AnomalyType.Camera:
@@ -269,7 +271,7 @@ public class AnomalyManager : MonoBehaviour
     {
         AudioListener[] audioListeners = FindObjectsByType<AudioListener>(FindObjectsSortMode.None);
 
-        // Remove all other AudioListeners
+        //AUDIO BUG FIX
         foreach (AudioListener listener in audioListeners)
         {
             if (listener.gameObject != cam.gameObject)
@@ -277,8 +279,7 @@ public class AnomalyManager : MonoBehaviour
                 Destroy(listener);
             }
         }
-
-        // Add AudioListener to the current camera if it doesn't have one
+        
         if (cam.GetComponent<AudioListener>() == null)
         {
             cam.gameObject.AddComponent<AudioListener>();
@@ -286,3 +287,4 @@ public class AnomalyManager : MonoBehaviour
     }
 
 }
+
