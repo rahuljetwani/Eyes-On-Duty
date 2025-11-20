@@ -6,36 +6,35 @@ using UnityEngine.SceneManagement;
 public class IntroUI : MonoBehaviour
 {
     [Header("UI Elements")]
-    public Button startButton;                    // Start button
+    public Button startButton;                    
     public CanvasGroup startButtonCanvasGroup;    // CanvasGroup for fading the button
-    public CanvasGroup messageCanvasGroup;        // CanvasGroup for fading in the message text
+    public CanvasGroup messageCanvasGroup;        
+
 
     [Header("Camera Settings")]
-    public Transform cameraTransform;             // Reference to the camera
-    public float fadeDuration = 1f;               // Duration of fade-out
-    public float rotateDuration = 2f;             // Duration of camera rotation
-    public float messageFadeDuration = 1f;        // Duration of the message fade-in
+    public Transform cameraTransform;             
+    public float fadeDuration = 1f;             
+    public float rotateDuration = 2f;            
+    public float messageFadeDuration = 1f;       
 
     private void Start()
     {
-        // Hide the message text initially
         messageCanvasGroup.alpha = 0f;
         messageCanvasGroup.interactable = false;
         messageCanvasGroup.blocksRaycasts = false;
 
-        // Hook up the button click
         startButton.onClick.AddListener(() => StartCoroutine(PlayIntroSequence()));
     }
 
     private IEnumerator PlayIntroSequence()
     {
-        // Fade out the button
+        // Fade out 
         yield return StartCoroutine(FadeOutButton());
 
-        // Rotate the camera
+        // Rotate the Camera
         yield return StartCoroutine(RotateCamera());
 
-        // Fade in the message
+        // Fade in 
         yield return StartCoroutine(FadeInMessage());
     }
 
@@ -61,7 +60,7 @@ public class IntroUI : MonoBehaviour
         float elapsed = 0f;
         float startXRotation = cameraTransform.eulerAngles.x;
 
-        // Adjust if rotation is negative
+        // Cheaking For Negetive
         if (startXRotation > 180f) startXRotation -= 360f;
 
         float targetXRotation = 20f;
@@ -83,7 +82,7 @@ public class IntroUI : MonoBehaviour
         float startAlpha = 0f;
         float targetAlpha = 1f;
 
-        // Make the text ready to appear
+        // textReady
         messageCanvasGroup.interactable = true;
         messageCanvasGroup.blocksRaycasts = true;
 
@@ -103,3 +102,4 @@ public class IntroUI : MonoBehaviour
     }
 
 }
+
